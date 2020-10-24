@@ -1,13 +1,14 @@
 import { Router } from "express";
 import multer from "multer";
 import uploadConfig from "./config/upload";
-import CatadorController from "./controllers/CatadorController";
+import UsuarioController from "./controllers/UsuarioController";
 
 const routes = Router();
 const upload = multer(uploadConfig);
 
-routes.get("/catador", CatadorController.index);
-routes.get("/catador/:id", CatadorController.show);
-routes.post("/catador", CatadorController.create);
-
+//usuario
+routes.get("/usuario/:id", UsuarioController.index);
+routes.get("/usuario", UsuarioController.show);
+routes.get("/login", UsuarioController.login);
+routes.post("/usuario", upload.single('imagem'), UsuarioController.create)
 export default routes;

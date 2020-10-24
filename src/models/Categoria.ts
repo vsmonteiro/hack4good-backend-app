@@ -7,7 +7,4 @@ export default class Categoria {
  
   @Column()
   descricao: string;
-
-  // @ManyToMany(() => Catador, catador => catador.categorias)
-  // catadores: Catador[]
 }
