@@ -31,7 +31,7 @@ export default {
     })  
     if(!bo)
       {
-        return res.json("User not found.")
+        return res.json("USER NOT FOUND")
       }
   },
 
