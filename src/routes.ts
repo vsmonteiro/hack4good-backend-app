@@ -9,6 +9,6 @@ const upload = multer(uploadConfig);
 //usuario
 routes.get("/usuario/:id", UsuarioController.index);
 routes.get("/usuario", UsuarioController.show);
-routes.get("/login", UsuarioController.login);
+routes.post("/login", UsuarioController.login);
 routes.post("/usuario", upload.single('imagem'), UsuarioController.create)
 export default routes;
