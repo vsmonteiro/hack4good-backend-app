@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { getRepository } from "typeorm";
 import Usuario from "../models/Usuario";
 import CatadorCategoria from "../models/CatadorCategoria";
+import Categoria from "../models/Categoria";
 import path from "path";
 
 export default {
@@ -34,6 +35,32 @@ export default {
     }
   },
 
+  async search(req: Request, res: Response) {
+    const categoriaRepo = getRepository(Categoria)
+    const catadorCategoriaRepo = getRepository(CatadorCategoria)
+    const usuarioRepo = getRepository(Usuario)
+
+    const { descricoes } = req.body
+    let descricoesId: any = []
+    let catadoresId: any = [];
+
+    for (let descricao of descricoes) {
+      let id = await categoriaRepo.findOne({ select: ["id"], where: { descricao: descricao } })
+      descricoesId.push(id?.id)
+    }
+
+    for (let descricaoId of descricoesId) {
+      let catadorId = await catadorCategoriaRepo.findOne({ select: ["catador_id"], where: { categoria_id: descricaoId } })
+      if (!catadoresId.includes(catadorId)) {
+        catadoresId.push(catadorId?.catador_id);
+      }
+    }
+
+    let catadores = await usuarioRepo.findByIds(catadoresId);
+    return res.send(catadores);
+  },
+
+
   async image(req: Request, res: Response) {
     return res.sendFile(path.join(__dirname, "..", "..", `uploads/${req.params.name}`))
   },
@@ -44,7 +71,6 @@ export default {
     const { username, senha, nome, isCatador, termoDeServico, telefone, email,
       descricao, latitude, longitude, categorias } = req.body;
     const catadorCategorias: any = []
-    console.log()
     const usuario = usuarioRepo.create({
       username,
       senha,
@@ -67,7 +93,6 @@ export default {
         catador_id: usuario.id,
         categoria_id: categoria.id
       })
-
       catadorCategorias.push(catadorCategoria)
     })
 

@@ -1,10 +1,15 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from "typeorm";
+import Usuario from "./Usuario";
 
-@Entity('CATEGORIAS')
+@Entity("CATEGORIAS")
 export default class Categoria {
   @PrimaryGeneratedColumn('increment')
   id: number;
  
   @Column()
   descricao: string;
+
+
+  /*@ManyToMany(() => Usuario, usuario => usuario.categorias)
+  usuarios: Usuario[];*/
 }
