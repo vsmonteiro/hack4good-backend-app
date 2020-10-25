@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { getRepository } from "typeorm";
 import Usuario from "../models/Usuario";
 import CatadorCategoria from "../models/CatadorCategoria";
+import path from "path";
 
 export default {
   async show(req: Request, res: Response) {
@@ -16,32 +17,34 @@ export default {
     return res.json(usuario)
   },
 
-  async login(req: Request, res: Response){
+  async login(req: Request, res: Response) {
     const usuarioRepo = getRepository(Usuario)
     const usuarios = await usuarioRepo.find()
-    var k: any
-    let bo: boolean = false
-    usuarios.forEach(async(usuario: any)=>{
-      if(usuario.username===req.body.username && usuario.senha===req.body.senha)
-      {
-        bo=true
-        k = await usuarioRepo.findOne(usuario.id)
-        return res.json(k)
+    var user: any
+    let flag: boolean = false
+    usuarios.forEach(async (usuario: any) => {
+      if (usuario.username === req.body.username && usuario.senha === req.body.senha) {
+        flag = true
+        user = await usuarioRepo.findOne(usuario.id)
+        return res.json(user)
       }
-    })  
-    if(!bo)
-      {
-        return res.json("USER NOT FOUND")
-      }
+    })
+    if (!flag) {
+      return res.json("USER NOT FOUND")
+    }
+  },
+
+  async image(req: Request, res: Response) {
+    return res.sendFile(path.join(__dirname, "..", "..", `uploads/${req.params.name}`))
   },
 
   async create(req: Request, res: Response) {
     const catadorCategoriaRepo = getRepository(CatadorCategoria)
     const usuarioRepo = getRepository(Usuario)
     const { username, senha, nome, isCatador, termoDeServico, telefone, email,
-       descricao, latitude, longitude, categorias } = req.body;
-       const catadorCategorias: any = []
-      console.log()
+      descricao, latitude, longitude, categorias } = req.body;
+    const catadorCategorias: any = []
+    console.log()
     const usuario = usuarioRepo.create({
       username,
       senha,
@@ -51,7 +54,7 @@ export default {
       termoDeServico,
       telefone,
       email,
-      imagem: req.file.path,
+      imagem: req.file.filename,
       descricao,
       latitude,
       longitude
@@ -60,7 +63,7 @@ export default {
     await usuarioRepo.save(usuario)
 
     categorias?.map((categoria: any) => {
-     const catadorCategoria = catadorCategoriaRepo.create({
+      const catadorCategoria = catadorCategoriaRepo.create({
         catador_id: usuario.id,
         categoria_id: categoria.id
       })
@@ -70,5 +73,5 @@ export default {
 
     await catadorCategoriaRepo.save(catadorCategorias)
     return res.json({ usuario })
-  },     
+  }
 };
