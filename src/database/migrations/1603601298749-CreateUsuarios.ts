@@ -1,4 +1,4 @@
-import {MigrationInterface, QueryRunner, Table} from "typeorm";
+import { MigrationInterface, QueryRunner, Table } from "typeorm";
 
 export class CreateUsuarios1603601298749 implements MigrationInterface {
     public async up(queryRunner: QueryRunner): Promise<void> {
@@ -22,15 +22,15 @@ export class CreateUsuarios1603601298749 implements MigrationInterface {
                     {
                         name: "senha",
                         type: "varchar",
-                    },                    
+                    },
                     {
                         name: "nome",
                         type: "varchar",
-                    },                    
+                    },
                     {
                         name: "pontos",
                         type: "number",
-                    },  
+                    },
                     {
                         name: "isCatador",
                         type: "boolean",
@@ -41,27 +41,27 @@ export class CreateUsuarios1603601298749 implements MigrationInterface {
                     },
                     {
                         name: "telefone",
-                        type: "number",                        
+                        type: "number",
                         isNullable: true,
                     },
                     {
                         name: "email",
                         type: "varchar",
                         isNullable: true,
-                    },                                                  
+                    },
                     {
                         name: "imagem",
                         type: "varchar",
                         isNullable: true,
-                    },                    
+                    },
                     {
                         name: "descricao",
                         type: "varchar",
                         isNullable: true,
-                    },                    
+                    },
                     {
                         name: "latitude",
-                        type: "number",                        
+                        type: "number",
                         isNullable: true,
                     },
                     {

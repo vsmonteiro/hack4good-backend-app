@@ -58,14 +58,14 @@ export default {
       }
     }
     let catadores = await usuarioRepo.findByIds(catadoresId);
-    
-    for(let catador of catadores){
-      const abc = await catadorCategoriaRepo.find({ select: ["categoria_id"], where: { catador_id: catador.id}})
+
+    for (let catador of catadores) {
+      const abc = await catadorCategoriaRepo.find({ select: ["categoria_id"], where: { catador_id: catador.id } })
       abc.forEach(ab => {
         categoriasId.push(ab.categoria_id)
       })
       catador.categorias = await categoriaRepo.findByIds(categoriasId)
-       catadoresComCategorias.push(catador)
+      catadoresComCategorias.push(catador)
     }
     return res.send(catadoresComCategorias);
   },
@@ -95,7 +95,7 @@ export default {
       latitude,
       longitude
     })
-
+    console.log(usuario)
     await usuarioRepo.save(usuario)
 
     categorias?.map((categoria: any) => {
