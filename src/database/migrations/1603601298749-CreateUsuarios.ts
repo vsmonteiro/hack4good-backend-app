@@ -75,7 +75,6 @@ export class CreateUsuarios1603601298749 implements MigrationInterface {
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        console.log("porra vinicius vacilao");
         await queryRunner.dropTable("USUARIOS");
     }
 }

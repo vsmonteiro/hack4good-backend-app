@@ -8,8 +8,4 @@ export default class Categoria {
  
   @Column()
   descricao: string;
-
-
-  /*@ManyToMany(() => Usuario, usuario => usuario.categorias)
-  usuarios: Usuario[];*/
 }

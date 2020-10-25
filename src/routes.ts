@@ -6,7 +6,7 @@ import UsuarioController from "./controllers/UsuarioController";
 const routes = Router();
 const upload = multer(uploadConfig);
 
-//usuario
+//user
 routes.get("/usuario/:id", UsuarioController.index);
 routes.get("/usuario", UsuarioController.show);
 routes.get("/imagem/:name", UsuarioController.image);
