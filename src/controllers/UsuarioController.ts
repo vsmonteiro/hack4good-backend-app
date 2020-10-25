@@ -64,12 +64,9 @@ export default {
       abc.forEach(ab => {
         categoriasId.push(ab.categoria_id)
       })
-      console.log(categoriasId)
       catador.categorias = await categoriaRepo.findByIds(categoriasId)
        catadoresComCategorias.push(catador)
-      console.log(catador)
     }
-    console.log("SEND PUTO")
     return res.send(catadoresComCategorias);
   },
 
