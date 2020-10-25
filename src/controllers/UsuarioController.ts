@@ -12,7 +12,7 @@ export default {
 
   async index(req: Request, res: Response) {
     const usuarioRepo = getRepository(Usuario)
-    const usuario = await usuarioRepo.findOne(req.body.id)
+    const usuario = await usuarioRepo.findOne(req.params.id)
     return res.json(usuario)
   },
 
