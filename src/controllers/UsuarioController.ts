@@ -59,7 +59,7 @@ export default {
 
     await usuarioRepo.save(usuario)
 
-    categorias.map((categoria: any) => {
+    categorias?.map((categoria: any) => {
      const catadorCategoria = catadorCategoriaRepo.create({
         catador_id: usuario.id,
         categoria_id: categoria.id
