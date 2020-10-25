@@ -42,7 +42,9 @@ export default {
 
     const { descricoes } = req.body
     let descricoesId: any = []
-    let catadoresId: any = [];
+    let catadoresId: any = []
+    let categoriasId: any = []
+    let catadoresComCategorias: any = []
 
     for (let descricao of descricoes) {
       let id = await categoriaRepo.findOne({ select: ["id"], where: { descricao: descricao } })
@@ -55,9 +57,20 @@ export default {
         catadoresId.push(catadorId?.catador_id);
       }
     }
-
     let catadores = await usuarioRepo.findByIds(catadoresId);
-    return res.send(catadores);
+    
+    for(let catador of catadores){
+      const abc = await catadorCategoriaRepo.find({ select: ["categoria_id"], where: { catador_id: catador.id}})
+      abc.forEach(ab => {
+        categoriasId.push(ab.categoria_id)
+      })
+      console.log(categoriasId)
+      catador.categorias = await categoriaRepo.findByIds(categoriasId)
+       catadoresComCategorias.push(catador)
+      console.log(catador)
+    }
+    console.log("SEND PUTO")
+    return res.send(catadoresComCategorias);
   },
 
 
