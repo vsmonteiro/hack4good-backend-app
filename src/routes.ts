@@ -6,9 +6,11 @@ import UsuarioController from "./controllers/UsuarioController";
 const routes = Router();
 const upload = multer(uploadConfig);
 
-//usuario
+//user
 routes.get("/usuario/:id", UsuarioController.index);
 routes.get("/usuario", UsuarioController.show);
-routes.get("/login", UsuarioController.login);
+routes.get("/imagem/:name", UsuarioController.image);
+routes.post("/search", UsuarioController.search)
+routes.post("/login", UsuarioController.login);
 routes.post("/usuario", upload.single('imagem'), UsuarioController.create)
 export default routes;

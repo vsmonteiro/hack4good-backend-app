@@ -1,6 +1,6 @@
 import { MigrationInterface, QueryRunner, Table } from "typeorm";
 
-export class CreateUsuarios1603559708722 implements MigrationInterface {
+export class CreateUsuarios1603601298749 implements MigrationInterface {
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(
             new Table({
@@ -22,15 +22,15 @@ export class CreateUsuarios1603559708722 implements MigrationInterface {
                     {
                         name: "senha",
                         type: "varchar",
-                    },                    
+                    },
                     {
                         name: "nome",
                         type: "varchar",
-                    },                    
+                    },
                     {
                         name: "pontos",
                         type: "number",
-                    },  
+                    },
                     {
                         name: "isCatador",
                         type: "boolean",
@@ -41,27 +41,27 @@ export class CreateUsuarios1603559708722 implements MigrationInterface {
                     },
                     {
                         name: "telefone",
-                        type: "number",                        
+                        type: "number",
                         isNullable: true,
                     },
                     {
                         name: "email",
                         type: "varchar",
                         isNullable: true,
-                    },                                                  
+                    },
                     {
                         name: "imagem",
                         type: "varchar",
                         isNullable: true,
-                    },                    
+                    },
                     {
                         name: "descricao",
                         type: "varchar",
                         isNullable: true,
-                    },                    
+                    },
                     {
                         name: "latitude",
-                        type: "number",                        
+                        type: "number",
                         isNullable: true,
                     },
                     {
@@ -75,7 +75,6 @@ export class CreateUsuarios1603559708722 implements MigrationInterface {
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        console.log("porra vinicius vacilao");
         await queryRunner.dropTable("USUARIOS");
     }
 }

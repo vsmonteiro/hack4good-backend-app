@@ -17,22 +17,22 @@ export default class Usuario {
 
   @Column()
   pontos: number;
-  
+
   @Column()
   isCatador: boolean;
-  
+
   @Column()
   termoDeServico: boolean;
-  
+
   @Column({ nullable: true })
   telefone: number;
-  
+
   @Column({ nullable: true })
   email: string;
 
   @Column({ nullable: true })
   imagem: string;
-  
+
   @Column({ nullable: true })
   descricao: string;
 
